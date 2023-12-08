@@ -1,8 +1,10 @@
-package org.example.service;
+package org.example.servies;
 
 import org.example.configuration.JPAConfiguration;
 import org.example.entities.Adress;
 import org.example.repositories.AdresRepository;
+
+import java.util.List;
 
 public class AdressService {
 
@@ -32,6 +34,13 @@ public class AdressService {
     public Adress findAdress(Integer id){
         return adresRepository.findAdress(id);
     }
+
+
+    public List<Adress> findAdressesByStreetName(String streetname){
+        return adresRepository.findAdressesByStreetName(streetname);
+    }
+
+
 
 
 

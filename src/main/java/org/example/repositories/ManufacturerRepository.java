@@ -1,31 +1,51 @@
 package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
-import org.example.entities.Adress;
+import jakarta.persistence.Query;
 import org.example.entities.Manufacturer;
 
-public class ManufacturerRepositoryCopy extends Repository<Manufacturer>{
-    public ManufacturerRepositoryCopy(EntityManager entityManager) {
+import java.sql.ResultSet;
+import java.util.List;
+
+public class ManufacturerRepository extends Repository<Manufacturer>{
+
+    private EntityManager entityManager;
+    public ManufacturerRepository(EntityManager entityManager) {
 
         super(entityManager);
-    }
-
-    @Override
-    public Manufacturer add(Manufacturer object) {
-        return super.add(object);
+        this.entityManager = entityManager;
     }
 
 
-    @Override
-    public Manufacturer find(Integer id, Class<Manufacturer> entityclass) {
-        return super.find(id, entityclass);
-    }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
         Manufacturer manufacturerToUpdate = find(manufacturer.getId(), Manufacturer.class);
+        entityManager.getTransaction().begin();
 
 
-        ;
+        manufacturerToUpdate.setName(manufacturer.getName());
+        manufacturerToUpdate.setCountry(manufacturer.getCountry());
+
+
+        entityManager.getTransaction().commit();
+
+        return find(manufacturer.getId(), Manufacturer.class);
+
+
+    }
+
+
+    public List<Manufacturer> findManufacturersByName(String name){
+        this.entityManager.getTransaction().begin();
+
+        Query query = entityManager.createQuery("select mfr from Manufacturer mfr where " +
+                "lower(name)=lower(:p1)");
+
+        query.setParameter("p1", name);
+
+        List<Manufacturer>resultList = query.getResultList();
+        entityManager.getTransaction().commit();
+        return resultList;
     }
 }

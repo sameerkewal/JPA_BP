@@ -2,9 +2,10 @@ package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import org.example.entities.Adress;
 
+import java.util.List;
 
 
 public class AdresRepository {
@@ -21,9 +22,9 @@ public class AdresRepository {
 
     public Adress addAdres(Adress adress){
         entityManager.getTransaction().begin();
-        entityManager.merge(adress);
+        Adress adressAdded = entityManager.merge(adress);
         entityManager.getTransaction().commit();
-        return adress;
+        return adressAdded;
     }
 
 
@@ -38,9 +39,9 @@ public class AdresRepository {
         entityManager.getTransaction().begin();
 
 
-        adressToUpdate.setStraatnaam(adress.getStraatnaam());
-        adressToUpdate.setHuisnummer(adress.getHuisnummer());
-        adressToUpdate.setWijk(adressToUpdate.getWijk());
+        adressToUpdate.setStreetname(adress.getStreetname());
+        adressToUpdate.setHousenumber(adress.getHousenumber());
+        adressToUpdate.setNeighborhood(adressToUpdate.getNeighborhood());
 
 
         entityManager.getTransaction().commit();
@@ -54,6 +55,17 @@ public class AdresRepository {
         entityManager.getTransaction().commit();
 
 
+    }
+
+
+    public List<Adress> findAdressesByStreetName(String streetname){
+        this.entityManager.getTransaction().begin();
+
+        Query query = entityManager.createQuery("select adress from Adress adress where lower(streetname)=lower(:p1) ");
+        query.setParameter("p1", streetname);
+        List<Adress> resultList = query.getResultList();
+        entityManager.getTransaction().commit();
+        return resultList;
     }
 
     public void close(){

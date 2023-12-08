@@ -7,48 +7,29 @@ import jakarta.persistence.*;
 public class Adress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "straatnaam", nullable = true, length = 100)
+    @Column(name = "streetname", nullable = false, length = 100)
 
-    private String straatnaam;
+    private String streetname;
 
-    @Column(name = "huisnummer", nullable = true)
-    private Integer huisnummer;
+    @Column(name = "housenumber", nullable = false)
+    private Integer housenumber;
 
-    @Column(name = "wijk", nullable = true, length = 100)
-    private String wijk;
-
-
+    @Column(name = "neighborhood", nullable = true, length = 100)
+    private String neighborhood;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
-    public Adress(Integer id, String straatnaam, Integer huisnummer, String wijk) {
-        this.id = id;
-        this.straatnaam = straatnaam;
-        this.huisnummer = huisnummer;
-        this.wijk = wijk;
+    public Adress( String streetname, Integer housenumber, String neighborhood) {
+        this.streetname = streetname;
+        this.housenumber = housenumber;
+        this.neighborhood = neighborhood;
     }
 
-    public Adress(String straatnaam, Integer huisnummer, String wijk, User user) {
-        this.straatnaam = straatnaam;
-        this.huisnummer = huisnummer;
-        this.wijk = wijk;
-        this.user = user;
-    }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+
 
     public Adress() {
     }
@@ -57,37 +38,37 @@ public class Adress {
         return id;
     }
 
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getStraatnaam() {
-        return straatnaam;
+    public String getStreetname() {
+        return streetname;
     }
 
-    public void setStraatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
+    public void setStreetname(String streetname) {
+        this.streetname = streetname;
     }
 
-    public Integer getHuisnummer() {
-        return huisnummer;
+    public Integer getHousenumber() {
+        return housenumber;
     }
 
-    public void setHuisnummer(Integer huisnummer) {
-        this.huisnummer = huisnummer;
+    public void setHousenumber(Integer housenumber) {
+        this.housenumber = housenumber;
     }
 
-    public String getWijk() {
-        return wijk;
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
-    public void setWijk(String wijk) {
-        this.wijk = wijk;
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
-
 
     public String toString(){
-        return this.straatnaam+" " + this.huisnummer+" in wijk " + this.wijk;
+        return this.getId()+": " +this.streetname+" " + this.housenumber+" in neighborhood " + this.neighborhood;
 
     }
 }
