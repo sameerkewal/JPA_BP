@@ -21,3 +21,12 @@ deze producten allemaal verkocht worden
 -	Overzicht van de verkoop per product
 -	Overzicht van meest waardevolle klanten op basis van aankoopbedrag
 
+
+
+## ERD:
+![img.png](erd.png)
+
+
+## Flowchart:
+![img_1.png](flowchart.png)
+

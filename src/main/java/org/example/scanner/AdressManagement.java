@@ -27,7 +27,8 @@ public class AdressManagement {
             System.out.println("0. Exit");
             System.out.println("1. Add New Adress");
             System.out.println("2. Update Adress");
-            System.out.println("3. Find Adress Details");
+            System.out.println("3. Find Adress Details by streetname");
+            System.out.println("4. Find Adress Details by streetname and housenumber");
 
             int choice = utilInputHandler.getUserIntegerChoice();
 
@@ -44,6 +45,9 @@ public class AdressManagement {
                 case 3:
                     findAdressByStreetName();
                     break;
+                case 4:
+                    findAdressesByStreetNameAndHouseNumber();
+                    break;
                 case 0:
                     return;
 //                    break;
@@ -57,8 +61,24 @@ public class AdressManagement {
 
         }
 
+    private void findAdressesByStreetNameAndHouseNumber() {
+        System.out.println("Provide streetname: ");
+        String streetName = utilInputHandler.getUserStringChoice();
 
-        private void addAdress(){
+        System.out.println("Provide housenumber: ");
+        int houseNumber = utilInputHandler.getUserIntegerChoice();
+
+        Adress adressByStreetNameAndHouseNumber = adressService.findAdressesByStreetNameAndHouseNumber(streetName, houseNumber);
+        if(adressByStreetNameAndHouseNumber == null){
+            System.out.println("The combination of housenumber and streetname does not exist in the system");
+        }else{
+            System.out.println(adressByStreetNameAndHouseNumber);
+        }
+
+    }
+
+
+    private void addAdress(){
             System.out.println("Provide streetname: (cannot be empty)");
             String streetName = utilInputHandler.getUserStringChoice();
 

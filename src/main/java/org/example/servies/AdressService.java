@@ -40,7 +40,9 @@ public class AdressService {
         return adresRepository.findAdressesByStreetName(streetname);
     }
 
-
+    public Adress findAdressesByStreetNameAndHouseNumber(String streetName, int houseNumber){
+        return adresRepository.findAdressByStreetNameAndHouseNumber(streetName, houseNumber);
+    }
 
 
 

@@ -3,7 +3,7 @@ package org.example.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Adress")
+@Table(name = "Adress", uniqueConstraints = @UniqueConstraint(columnNames = {"streetname", "housenumber"}))
 public class Adress {
 
     @Id

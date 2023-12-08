@@ -68,6 +68,25 @@ public class AdresRepository {
         return resultList;
     }
 
+
+    public Adress findAdressByStreetNameAndHouseNumber(String streetName, int houseNumber){
+        this.entityManager.getTransaction().begin();
+
+        Query query = entityManager.createQuery("" +
+                "select  adress " +
+                "from   Adress adress " +
+                "where  lower(streetname)=lower(:p1)" +
+                "and    housenumber = :p2");
+        query.setParameter("p1", streetName);
+        query.setParameter("p2", houseNumber);
+        List<Adress> resultList = query.getResultList();
+        entityManager.getTransaction().commit();
+        if(resultList.isEmpty()){
+            return null;
+        }
+        return resultList.get(0);
+    }
+
     public void close(){
         this.entityManager.close();
 //        this.emf.close();
