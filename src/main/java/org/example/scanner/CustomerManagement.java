@@ -50,7 +50,7 @@ public class CustomerManagement {
         }
     }
 
-    private void findCustomerByFirstAndLastName() {
+    protected void findCustomerByFirstAndLastName() {
         System.out.println("Provide firstname: ");
         String firstName = utilInputHandler.getUserStringChoice();
 
@@ -65,7 +65,7 @@ public class CustomerManagement {
         }
     }
 
-    private void addCustomer() {
+    public Customer addCustomer() {
         System.out.println("Provide firstname: ");
         String firstName = utilInputHandler.getUserStringChoice();
 
@@ -89,10 +89,14 @@ public class CustomerManagement {
             String neighborhoodOfCustomer = utilInputHandler.getUserStringChoice();
 
             Adress adressAdded = adressService.createAdress(new Adress(streetNameOfCustomer, houseNumberOfCustomer, neighborhoodOfCustomer));
-            System.out.println(customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressAdded)));
+            Customer addedCustomer = customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressAdded));
+            System.out.println(addedCustomer);
+            return addedCustomer;
 
         }else{
-            System.out.println(customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressByStreetNameAndHouseNumber)));
+            Customer addedCustomer= customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressByStreetNameAndHouseNumber));
+            System.out.println(addedCustomer);
+            return addedCustomer;
         }
 
 

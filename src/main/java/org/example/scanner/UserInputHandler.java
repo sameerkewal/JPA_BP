@@ -1,5 +1,7 @@
 package org.example.scanner;
 
+import org.example.entities.Sale;
+
 import java.util.Scanner;
 
 public class UserInputHandler {
@@ -10,17 +12,21 @@ public class UserInputHandler {
     private final CustomerManagement customerManagement;
     private final ProductManagement productManagement;
 
+    private final SaleManagement saleManagement;
+
     private final UtilInputHandler utilInputHandler;
 
 
 
 
     public UserInputHandler() {
+
         this.scanner = new Scanner(System.in);
         this.adressManagement = new AdressManagement(this.scanner);
         this.manufacturerManagement = new ManufacturerManagement(this.scanner);
         this.customerManagement = new CustomerManagement(this.scanner);
         this.productManagement = new ProductManagement(this.scanner);
+        this.saleManagement = new SaleManagement(this.scanner);
 
         utilInputHandler = new UtilInputHandler(this.scanner);
 
@@ -32,7 +38,7 @@ public class UserInputHandler {
     public void handleUserInput() {
 
             System.out.println("Welcome to UBuy, what would you like to do today?:");
-            System.out.println("1. Order Management");
+            System.out.println("1. Sale Management");
             System.out.println("2. Product Management");
             System.out.println("3. Customer Management");
             System.out.println("4. Adress Management");
@@ -45,7 +51,7 @@ public class UserInputHandler {
             // Handle user choice
             switch (choice) {
                 case 1:
-                    orderManagement();
+                    saleManagement.mainSaleManagement();
                     break;
                 case 2:
                     productManagement.mainProductManagement();
@@ -75,17 +81,7 @@ public class UserInputHandler {
 
 
 
-    private void orderManagement() {
 
-    }
-
-    private void customerManagement() {
-
-    }
-
-    private void productManagement() {
-
-    }
 
 
 

@@ -3,6 +3,8 @@ package org.example.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +16,8 @@ public class Sale {
     private Integer id;
 
 
-    private Date sale_date;
+
+    private LocalDateTime sale_date;
 
 
     @ManyToOne
@@ -34,7 +37,7 @@ public class Sale {
         this.saleProducts = saleProducts;
     }
 
-    public Sale(Date sale_date, Customer customer) {
+    public Sale(LocalDateTime sale_date, Customer customer) {
         this.sale_date = sale_date;
         this.customer = customer;
 //        this.products = products;
@@ -42,6 +45,14 @@ public class Sale {
 
     public Sale() {
 
+    }
+
+    public LocalDateTime getSale_date() {
+        return sale_date;
+    }
+
+    public void setSale_date(LocalDateTime sale_date) {
+        this.sale_date = sale_date;
     }
 
     public Integer getId() {
@@ -52,13 +63,7 @@ public class Sale {
         this.id = id;
     }
 
-    public Date getSale_date() {
-        return sale_date;
-    }
 
-    public void setSale_date(Date sales_date) {
-        this.sale_date = sales_date;
-    }
 
     public Customer getCustomer() {
         return customer;
