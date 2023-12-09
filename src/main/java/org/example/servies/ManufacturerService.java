@@ -4,8 +4,6 @@ import org.example.configuration.JPAConfiguration;
 import org.example.entities.Manufacturer;
 import org.example.repositories.ManufacturerRepository;
 
-import java.util.List;
-
 public class ManufacturerService {
 
     private final ManufacturerRepository manufacturerRepository;
@@ -27,8 +25,8 @@ public class ManufacturerService {
         return manufacturerRepository.update(manufacturer);
     }
 
-    public List<Manufacturer> findManufacturersByName(String name){
-        return manufacturerRepository.findManufacturersByName(name);
+    public Manufacturer findManufacturerByName(String name){
+        return manufacturerRepository.findManufacturerByName(name);
     }
 
 

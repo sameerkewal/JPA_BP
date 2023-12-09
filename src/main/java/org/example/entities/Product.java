@@ -11,8 +11,6 @@ public class Product {
 
     private String name;
 
-    private String description;
-
     private Integer price;
 
     @ManyToOne
@@ -22,9 +20,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, Integer price, Manufacturer manufacturer) {
+    public Product(String name, Integer price, Manufacturer manufacturer) {
         this.name = name;
-        this.description = description;
         this.price = price;
         this.manufacturer = manufacturer;
     }
@@ -45,13 +42,7 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Integer getPrice() {
         return price;
@@ -74,7 +65,6 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", manufacturer=" + manufacturer +
                 '}';

@@ -60,15 +60,15 @@ public class ManufacturerManagement {
         System.out.println("Enter the manufacturer name: ");
         String manufacturerName = utilInputHandler.getUserStringChoice();
 
-        List<Manufacturer> manufacturersByName = manufacturerService.findManufacturersByName(manufacturerName);
+        Manufacturer manufacturerByName = manufacturerService.findManufacturerByName(manufacturerName);
 
-        if(manufacturersByName.isEmpty()){
+        if(manufacturerByName == null){
             System.out.println("No Manfacturers with that name found");
+        }else{
+            System.out.println(manufacturerByName);
         }
 
-        for(Manufacturer manufacturer: manufacturersByName){
-            System.out.println(manufacturer);
-        }
+
     }
 
     private void deleteManufacturer() {
@@ -149,7 +149,9 @@ public class ManufacturerManagement {
 
 
         Manufacturer manufacturerAdded = manufacturerService.addManufacturer(new Manufacturer(manufacturerName, manufacturerLocation));
-        System.out.println(manufacturerAdded);
+        if(!(manufacturerAdded == null)){
+            System.out.println(manufacturerAdded);
+        }
 
     }
 

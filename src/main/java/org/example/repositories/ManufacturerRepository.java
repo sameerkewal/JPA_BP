@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.example.entities.Manufacturer;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 public class ManufacturerRepository extends Repository<Manufacturer>{
@@ -36,7 +35,7 @@ public class ManufacturerRepository extends Repository<Manufacturer>{
     }
 
 
-    public List<Manufacturer> findManufacturersByName(String name){
+    public Manufacturer findManufacturerByName(String name) {
         this.entityManager.getTransaction().begin();
 
         Query query = entityManager.createQuery("select mfr from Manufacturer mfr where " +
@@ -44,8 +43,11 @@ public class ManufacturerRepository extends Repository<Manufacturer>{
 
         query.setParameter("p1", name);
 
-        List<Manufacturer>resultList = query.getResultList();
+        List<Manufacturer> resultList = query.getResultList();
         entityManager.getTransaction().commit();
-        return resultList;
+        if (resultList.isEmpty()) {
+            return null;
+        }
+        return resultList.get(0);
     }
 }

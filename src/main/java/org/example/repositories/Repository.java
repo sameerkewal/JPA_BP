@@ -12,9 +12,14 @@ public abstract class Repository<T> {
     }
 
     public T add(T object){
-        entityManager.getTransaction().begin();
-        T addedObject = entityManager.merge(object);
-        entityManager.getTransaction().commit();
+        T addedObject = null;
+        try {
+            entityManager.getTransaction().begin();
+             addedObject = entityManager.merge(object);
+            entityManager.getTransaction().commit();
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         return addedObject;
     }
 

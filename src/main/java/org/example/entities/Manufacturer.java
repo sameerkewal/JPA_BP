@@ -3,6 +3,7 @@ package org.example.entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Manufacturer {
 
 
@@ -14,7 +15,7 @@ public class Manufacturer {
     private Integer id;
 
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = true)

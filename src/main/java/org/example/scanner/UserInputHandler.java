@@ -8,6 +8,7 @@ public class UserInputHandler {
     private final AdressManagement adressManagement;
     private final ManufacturerManagement manufacturerManagement;
     private final CustomerManagement customerManagement;
+    private final ProductManagement productManagement;
 
     private final UtilInputHandler utilInputHandler;
 
@@ -19,6 +20,7 @@ public class UserInputHandler {
         this.adressManagement = new AdressManagement(this.scanner);
         this.manufacturerManagement = new ManufacturerManagement(this.scanner);
         this.customerManagement = new CustomerManagement(this.scanner);
+        this.productManagement = new ProductManagement(this.scanner);
 
         utilInputHandler = new UtilInputHandler(this.scanner);
 
@@ -46,7 +48,7 @@ public class UserInputHandler {
                     orderManagement();
                     break;
                 case 2:
-                    productManagement();
+                    productManagement.mainProductManagement();
                     break;
                 case 3:
                     customerManagement.mainCustomerManagement();

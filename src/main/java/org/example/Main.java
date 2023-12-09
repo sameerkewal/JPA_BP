@@ -10,10 +10,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         UserInputHandler userInputHandler = new UserInputHandler();
-//        userInputHandler.handleUserInput();
+        userInputHandler.handleUserInput();
 
-        ProductService productService = new ProductService();
-        productService.findProductByManufacturer(null);
+//        ProductService productService = new ProductService();
+//        productService.findProductByManufacturer(null);
 
 //        AdressManagement adressManagement = new AdressManagement(scanner);
 //        adressManagement.adressManagement();

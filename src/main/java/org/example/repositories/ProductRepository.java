@@ -23,7 +23,6 @@ public class ProductRepository extends Repository<Product> {
         entityManager.getTransaction().begin();
 
         productToUpdate.setName(product.getName());
-        productToUpdate.setDescription(product.getDescription());
         productToUpdate.setPrice(product.getPrice());
         productToUpdate.setManufacturer(product.getManufacturer());
 
