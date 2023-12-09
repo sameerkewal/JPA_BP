@@ -9,10 +9,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        UserInputHandler userInputHandler = new UserInputHandler();
-        userInputHandler.handleUserInput();
+//        UserInputHandler userInputHandler = new UserInputHandler();
+//        userInputHandler.handleUserInput();
 
-//        ProductService productService = new ProductService();
+        ProductService productService = new ProductService();
 //        productService.findProductByManufacturer(null);
 
 //        AdressManagement adressManagement = new AdressManagement(scanner);

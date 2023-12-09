@@ -2,6 +2,9 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Product {
 
@@ -17,7 +20,24 @@ public class Product {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
+    @OneToMany(mappedBy = "product")
+    private Set<SaleProducts> saleProducts = new HashSet<>();
+
+
+
+
+
+
     public Product() {
+    }
+
+
+    public Set<SaleProducts> getSaleProducts() {
+        return saleProducts;
+    }
+
+    public void setSaleProducts(Set<SaleProducts> saleProducts) {
+        this.saleProducts = saleProducts;
     }
 
     public Product(String name, Integer price, Manufacturer manufacturer) {
