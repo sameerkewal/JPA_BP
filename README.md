@@ -24,9 +24,9 @@ deze producten allemaal verkocht worden
 
 
 ## ERD:
-![img.png](main/resources/concept%20resources/erd.png)
+![img.png](src/main/resources/concept%20resources/erd.png)
 
 
 ## Flowchart:
-![img_1.png](main/resources/concept%20resources/flowchart.png)
+![img_1.png](src/main/resources/concept%20resources/flowchart.png)
 
