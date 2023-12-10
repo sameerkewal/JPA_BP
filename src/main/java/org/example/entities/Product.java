@@ -1,6 +1,7 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,9 @@ public class Product {
 
     private String name;
 
-    private Integer price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
+
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
@@ -40,7 +43,7 @@ public class Product {
         this.saleProducts = saleProducts;
     }
 
-    public Product(String name, Integer price, Manufacturer manufacturer) {
+    public Product(String name, BigDecimal price, Manufacturer manufacturer) {
         this.name = name;
         this.price = price;
         this.manufacturer = manufacturer;
@@ -64,11 +67,11 @@ public class Product {
 
 
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

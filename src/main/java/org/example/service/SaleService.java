@@ -1,4 +1,4 @@
-package org.example.servies;
+package org.example.service;
 
 import org.example.configuration.JPAConfiguration;
 import org.example.entities.Sale;
@@ -14,5 +14,14 @@ public class SaleService {
 
     public Sale add(Sale sale){
         return saleRepository.add(sale);
+    }
+
+
+    public void delete(Sale sale){
+        saleRepository.delete(sale);
+    }
+
+    public Sale find(Integer id){
+        return saleRepository.find(id, Sale.class);
     }
 }

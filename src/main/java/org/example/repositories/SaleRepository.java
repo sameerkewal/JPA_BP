@@ -1,7 +1,10 @@
 package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.example.entities.Sale;
+
+import java.util.stream.Stream;
 
 public class SaleRepository extends Repository<Sale> {
 
@@ -16,6 +19,9 @@ public class SaleRepository extends Repository<Sale> {
     public Sale update(Sale object) {
         return null;
     }
+
+
+
 
 
 }

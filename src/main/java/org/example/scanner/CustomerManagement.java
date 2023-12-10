@@ -2,8 +2,8 @@ package org.example.scanner;
 
 import org.example.entities.Adress;
 import org.example.entities.Customer;
-import org.example.servies.AdressService;
-import org.example.servies.CustomerService;
+import org.example.service.AdressService;
+import org.example.service.CustomerService;
 
 import java.util.List;
 import java.util.Scanner;

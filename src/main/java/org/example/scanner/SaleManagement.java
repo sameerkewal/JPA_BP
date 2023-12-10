@@ -3,11 +3,13 @@ package org.example.scanner;
 import org.example.entities.Customer;
 import org.example.entities.Product;
 import org.example.entities.Sale;
-import org.example.servies.CustomerService;
-import org.example.servies.ProductService;
-import org.example.servies.SaleService;
+import org.example.entities.SaleProducts;
+import org.example.service.CustomerService;
+import org.example.service.ProductService;
+import org.example.service.SaleProductsService;
+import org.example.service.SaleService;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -20,6 +22,7 @@ public class SaleManagement {
     private final CustomerService customerService;
     private final CustomerManagement customerManagement;
     private final SaleService saleService;
+    private final SaleProductsService saleProductsService;
 
 
 
@@ -31,7 +34,7 @@ public class SaleManagement {
         this.customerService = new CustomerService();
         this.productService = new ProductService();
         this.saleService = new SaleService();
-
+        this.saleProductsService = new SaleProductsService();
     }
 
     public void mainSaleManagement(){
@@ -46,11 +49,7 @@ public class SaleManagement {
             case 0:
                 return;
             case 1:
-
-                Customer customerToAddToSale = addCustomerToSale();
-                System.out.println("CUst to add to sale: " + customerToAddToSale);
-
-                addSale(customerToAddToSale);
+                registerNewSale();
                 break;
         }
 
@@ -60,17 +59,51 @@ public class SaleManagement {
 
     }
 
+    private void registerNewSale(){
+        Customer customerToAddToSale = addCustomerToSale();
+        Sale sale = addSale(customerToAddToSale);
+
+        addItemsToSale(sale);
+
+        while(true){
+            System.out.println("Do you want to add another item to the sale?");
+            System.out.println("1. Yes");
+            System.out.println("2. Finish Transaction");
+            System.out.println("3. Cancel Transaction");
+            int choice = utilInputHandler.getUserIntegerChoice();
+
+//            Do you know the ID of item to add to sale? ->correct
+            //Do you want to add another item to the sale? -> correct
+
+            switch (choice){
+                case 1:
+                    addItemsToSale(sale);
+                    break;
+                case 2:
+                    if(!(saleProductsService.checkIfSaleHasProductsAddedToIt(sale))){
+                        saleService.delete(sale);
+                    }
+                    return;
+                case 3:
+                    saleProductsService.deleteSaleProducts(sale);
+                    saleService.delete(sale);
+                    return;
+            }
+
+        }
+    }
+
     private void addItemsToSale(Sale sale) {
         System.out.println("Do you know the ID of item to add to sale?");
         System.out.println("1. Yes");
         System.out.println("2. No");
-        System.out.println("3. Back To Sale Management");
+        System.out.println("3. Cancel Transaction");
 
         int doesUserKnowIdOfProduct = utilInputHandler.getUserIntegerChoice();
 
         if(doesUserKnowIdOfProduct == 2){
-                productManagement.findProductChoices();
-                addItemsToSale(sale);
+                 productManagement.findProductChoices();
+                 addItemsToSale(sale);
 
         } else if (doesUserKnowIdOfProduct == 1) {
 
@@ -80,20 +113,26 @@ public class SaleManagement {
 
             if(productToAddToSale == null){
                 System.out.println("No Product with that ID exists. Please try again");
-                addItemsToSale(sale);
+                 addItemsToSale(sale);
             }else{
+                System.out.println("Product quantity to add to sale: ");
+                int productQuantity = utilInputHandler.getUserIntegerChoice();
 
+                saleProductsService.add(new SaleProducts(sale, productToAddToSale, productQuantity));
             }
+        } else if (doesUserKnowIdOfProduct == 3) {
+                saleProductsService.deleteSaleProducts(sale);
+                saleService.delete(sale);
+                mainSaleManagement();
+            }
+
+         else{
+            addItemsToSale(sale);
         }
-
-        String productToAddToSale = utilInputHandler.getUserStringChoice();
-
-
-
-
-        System.out.println("Item Quantity: ");
-
     }
+
+
+
 
     private Customer addCustomerToSale(){
 

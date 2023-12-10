@@ -1,4 +1,4 @@
-package org.example.servies;
+package org.example.service;
 
 import org.example.configuration.JPAConfiguration;
 import org.example.entities.Adress;

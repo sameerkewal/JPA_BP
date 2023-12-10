@@ -2,6 +2,7 @@ package org.example.scanner;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 public class UtilInputHandler {
 
@@ -58,6 +59,14 @@ public class UtilInputHandler {
             return false;
         }
         return false;
+    }
+
+    public BigDecimal getUserBigDecimalChoice() {
+        while (!scanner.hasNextBigDecimal()) {
+            System.out.println("Invalid input. Please enter a valid decimal number.");
+            scanner.next(); // Consume invalid input
+        }
+        return scanner.nextBigDecimal();
     }
 
 

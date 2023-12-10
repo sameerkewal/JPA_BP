@@ -3,8 +3,9 @@ package org.example.scanner;
 
 import org.example.entities.Manufacturer;
 import org.example.entities.Product;
-import org.example.servies.*;
+import org.example.service.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
@@ -122,7 +123,7 @@ public class ProductManagement {
                 String newProductName = utilInputHandler.getUserStringChoice();
 
                 System.out.println("New Product Price:" );
-                int newProductPrice = utilInputHandler.getUserIntegerChoice();
+                BigDecimal newProductPrice = utilInputHandler.getUserBigDecimalChoice();
 
                 System.out.println("New manufacturer name: ");
                 String newManufacturerName = utilInputHandler.getUserStringChoice();
@@ -143,6 +144,8 @@ public class ProductManagement {
                     productToUpdate.setName(newProductName);
                     productToUpdate.setPrice(newProductPrice);
                     productToUpdate.setManufacturer(newManufacturer);
+
+
                     System.out.println(productService.update(productToUpdate));
 
                 }
@@ -172,7 +175,7 @@ public class ProductManagement {
 
 
         System.out.println("Provide product price: ");
-        int productPrice = utilInputHandler.getUserIntegerChoice();
+        BigDecimal productPrice = utilInputHandler.getUserBigDecimalChoice();
 
         System.out.println("Provide manufacturer Name: ");
         String manufacturerName = utilInputHandler.getUserStringChoice();

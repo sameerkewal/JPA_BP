@@ -1,10 +1,9 @@
 package org.example.scanner;
 
 import org.example.entities.Adress;
-import org.example.servies.AdressService;
+import org.example.service.AdressService;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 

@@ -1,10 +1,8 @@
 package org.example.scanner;
 
 import org.example.entities.Manufacturer;
-import org.example.servies.AdressService;
-import org.example.servies.ManufacturerService;
+import org.example.service.ManufacturerService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ManufacturerManagement {
