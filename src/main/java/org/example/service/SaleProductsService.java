@@ -29,4 +29,8 @@ public class SaleProductsService {
     public void getSalesBasedOnProducts(){
         saleProductsRepository.getSalesBasedOnProducts();
     }
+
+    public void getMostValuableCustomers(){
+        saleProductsRepository.getMostValuableCustomers();
+    }
 }

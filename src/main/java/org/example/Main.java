@@ -16,7 +16,7 @@ public class Main {
         SaleService saleService = new SaleService();
         SaleProductsService saleProductsService = new SaleProductsService();
 
-        saleProductsService.getSalesBasedOnProducts();
+        saleProductsService.getMostValuableCustomers();
 //
 //        Sale sale = saleService.find(36);
 //        saleProductsService.deleteSaleProducts(sale);

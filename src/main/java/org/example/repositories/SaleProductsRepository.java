@@ -55,22 +55,42 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
     }
 
 
-    public void getSalesBasedOnProducts(){
+    public void getSalesBasedOnProducts() {
         entityManager.getTransaction().begin();
 
         Query query = entityManager.createQuery(
                 "select  sps.product_id,  p.name, sps.total_sold, p.price, (sps.total_sold*p.price) as total_value from (select  product.id as product_id, sum(quantity) as total_sold from SaleProducts group by product.id) sps join Product p on p.id = sps.product_id");
 
         List<Object[]> resultList = query.getResultList();
+        entityManager.getTransaction().commit();
 
-        for(Object[] obj: resultList){
+        for (Object[] obj : resultList) {
             Integer id = (Integer) obj[0];
-            String name = (String)obj[1];
+            String name = (String) obj[1];
             Long sum = (Long) obj[2];
             BigDecimal price = (BigDecimal) obj[3];
             BigDecimal totalSold = (BigDecimal) obj[4];
 
-            System.out.println(id + " " + name + " " + price + " " + sum + " " + totalSold);
+            System.out.println(STR. "product: \{ name }, price: \{ price }, total sold: \{ sum }, value of total sold: \{ totalSold }" );
+
+        }
+    }
+
+        public void getMostValuableCustomers(){
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("select cust_with_id.customer_id, cmr.firstname, cmr.lastname, cust_with_id.total from(select sle.customer.id as customer_id, sum(all_sales.total_worth) as total from(select sle.id as sale_id, sum(sps.quantity*p.price) as total_worth from Sale sle join SaleProducts sps on sps.sale.id=sle.id join Product  p on p.id = sps.product.id group by sle.id) all_sales join Sale sle on sle.id = all_sales.sale_id group by sle.customer.id)cust_with_id join Customer cmr on cust_with_id.customer_id=cmr.id order by cust_with_id.total desc");
+            List<Object[]> resultList = query.getResultList();
+
+            entityManager.getTransaction().commit();
+
+            for (Object[] obj : resultList) {
+                Integer id = (Integer) obj[0];
+                String firstName = (String)obj[1];
+                String lastName = (String)obj[2];
+                BigDecimal totalWorth = (BigDecimal) obj[3];
+
+                System.out.println(STR."id:\{id}, name:\{firstName} \{lastName}, total worth:\{totalWorth}");
         }
 
 
