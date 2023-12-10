@@ -40,6 +40,7 @@ public class SaleManagement {
     public void mainSaleManagement(){
         System.out.println("0. Exit");
         System.out.println("1. Register New Sale");
+        System.out.println("2. Reports");
 
 
         int choice = utilInputHandler.getUserIntegerChoice();
@@ -51,10 +52,31 @@ public class SaleManagement {
             case 1:
                 registerNewSale();
                 break;
+            case 2:
+                reports();
         }
 
         if(utilInputHandler.stayInSpecificManagement("sales")){
             mainSaleManagement();
+        }
+
+    }
+
+    private void reports() {
+        System.out.println("1. Get total sales based on product");
+        System.out.println("2. Get most valuable customers based on spending");
+
+        int choice = utilInputHandler.getUserIntegerChoice();
+
+        switch (choice){
+            case 1:
+                saleProductsService.getSalesBasedOnProducts();
+                break;
+            case 2:
+                saleProductsService.getMostValuableCustomers();
+                break;
+            default:
+                reports();
         }
 
     }

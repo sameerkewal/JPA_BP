@@ -7,6 +7,7 @@ import org.example.entities.Sale;
 import org.example.entities.SaleProducts;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -94,5 +95,11 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
         }
 
 
+    }
+
+
+    public SaleProducts getSalesBasedOnDate(LocalDateTime localDateTime){
+
+        return null;
     }
 }
