@@ -10,7 +10,9 @@ import org.example.service.SaleProductsService;
 import org.example.service.SaleService;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class SaleManagement {
@@ -41,6 +43,7 @@ public class SaleManagement {
         System.out.println("0. Exit");
         System.out.println("1. Register New Sale");
         System.out.println("2. Reports");
+        System.out.println("3. Get Sales Based on Date");
 
 
         int choice = utilInputHandler.getUserIntegerChoice();
@@ -54,12 +57,30 @@ public class SaleManagement {
                 break;
             case 2:
                 reports();
+                break;
+            case 3:
+                getSalesBasedOnDate();
+                break;
+            default:
+                mainSaleManagement();
         }
 
         if(utilInputHandler.stayInSpecificManagement("sales")){
             mainSaleManagement();
         }
 
+    }
+
+    public void getSalesBasedOnDate() {
+        System.out.println("Sales from which date would you like to see?");
+
+        LocalDate usersDateChoice = utilInputHandler.getUsersDateChoice();
+
+        List<SaleProducts> salesBasedOnDate = saleProductsService.getSalesBasedOnDate(usersDateChoice.atStartOfDay());
+
+        for (SaleProducts saleProducts: salesBasedOnDate){
+            System.out.println(STR."\{saleProducts.getSale().getId()}: \{saleProducts.getProduct()},\{saleProducts.getQuantity()} bought by \{saleProducts.getSale().getCustomer()} at \{saleProducts.getSale().getSale_date()}");
+        }
     }
 
     private void reports() {

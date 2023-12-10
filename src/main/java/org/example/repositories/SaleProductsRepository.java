@@ -35,7 +35,6 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
         query.setParameter("p1", sale.getId());
 
         List<SaleProducts> result  = query.getResultList();
-        System.out.println(result);
 
         this.entityManager.getTransaction().commit();
 
@@ -72,7 +71,7 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
             BigDecimal price = (BigDecimal) obj[3];
             BigDecimal totalSold = (BigDecimal) obj[4];
 
-            System.out.println(STR. "product: \{ name }, price: \{ price }, total sold: \{ sum }, value of total sold: \{ totalSold }" );
+            System.out.println(STR. "product: \{ name }, price: \{ price }, total items sold: \{ sum }, value of total sold: \{ totalSold }" );
 
         }
     }
@@ -91,15 +90,28 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
                 String lastName = (String)obj[2];
                 BigDecimal totalWorth = (BigDecimal) obj[3];
 
-                System.out.println(STR."id:\{id}, name:\{firstName} \{lastName}, total worth:\{totalWorth}");
+                System.out.println(STR."id:\{id}, name:\{firstName} \{lastName}, total spent:\{totalWorth}");
         }
 
 
     }
 
 
-    public SaleProducts getSalesBasedOnDate(LocalDateTime localDateTime){
+    public List<SaleProducts> getSalesBasedOnDate(LocalDateTime localDateTime){
+        this.entityManager.getTransaction().begin();
+        System.out.println(STR."localdatetime received is: \{localDateTime}");
 
-        return null;
+        java.sql.Date sqlDate = java.sql.Date.valueOf(localDateTime.toLocalDate());
+
+        Query query = entityManager.createQuery("select sps from SaleProducts sps join Sale sle on sle.id = sps.sale.id where date(sle.sale_date)=:p1");
+//        Query query = entityManager.createQuery("select date(sle.sale_date) from SaleProducts sps join Sale sle on sle.id = sps.sale.id");
+        query.setParameter("p1", sqlDate);
+
+
+        List<SaleProducts> resultList = query.getResultList();
+
+        this.entityManager.getTransaction().commit();
+
+        return resultList;
     }
 }

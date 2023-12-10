@@ -1,6 +1,8 @@
 package org.example.scanner;
 
-import java.util.Locale;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.math.BigDecimal;
 
@@ -70,5 +72,30 @@ public class UtilInputHandler {
     }
 
 
+    public LocalDate getUsersDateChoice() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-}
+
+
+
+
+        LocalDate localDate = null;
+
+        // Loop until a valid date is entered
+        while (localDate == null) {
+            System.out.println("Enter the date in dd-MM-yyyy format(example: 09-12-2023)");
+            String dateString = scanner.next();
+
+            try {
+                // Parse the string into a LocalDateTime object
+                localDate = LocalDate.parse(dateString, formatter);
+            } catch (Exception e) {
+                System.out.println("Invalid date format. Please try again.");
+            }
+        }
+
+        return localDate;
+    }
+
+    }
+
