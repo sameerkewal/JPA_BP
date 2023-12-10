@@ -8,7 +8,7 @@ import org.example.entities.Adress;
 import java.util.List;
 
 
-public class AdresRepository {
+public class AdresRepository extends Repository<Adress> {
 
     private EntityManager entityManager;
     private EntityManagerFactory emf;
@@ -16,26 +16,13 @@ public class AdresRepository {
 
 
     public AdresRepository(EntityManager entityManager) {
-
+        super(entityManager);
       this.entityManager = entityManager;
     }
 
-    public Adress addAdres(Adress adress){
-        entityManager.getTransaction().begin();
-        Adress adressAdded = entityManager.merge(adress);
-        entityManager.getTransaction().commit();
-        return adressAdded;
-    }
-
-
-    public Adress findAdress(Integer id){
-        return entityManager.find(Adress.class, id);
-
-    }
-
-
-    public Adress updateAdress(Adress adress) {
-        Adress adressToUpdate = findAdress(adress.getId());
+    @Override
+    public Adress update(Adress adress) {
+        Adress adressToUpdate = find(adress.getId(), Adress.class);
         entityManager.getTransaction().begin();
 
 
@@ -49,13 +36,13 @@ public class AdresRepository {
 
     }
 
-    public void deleteAdres(Adress adress){
-        entityManager.getTransaction().begin();
-        entityManager.remove(adress);
-        entityManager.getTransaction().commit();
 
 
-    }
+
+
+
+
+
 
 
     public List<Adress> findAdressesByStreetName(String streetname){

@@ -15,6 +15,7 @@ public class UtilInputHandler {
         this.scanner = scanner;
     }
 
+
     protected int getUserIntegerChoice() {
         System.out.print("Enter your choice: ");
         while (!scanner.hasNextInt()) {
@@ -25,17 +26,12 @@ public class UtilInputHandler {
     }
 
     protected String getUserStringChoice() {
-        while (scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a string.");
-            scanner.next(); // Consume invalid input
-        }
-        return scanner.next();
+        String s = scanner.next();
+        s += scanner.nextLine();
+
+        return s;
+
     }
-
-
-
-
-
 
 
     public boolean goBackToMainMenu(){
@@ -74,10 +70,6 @@ public class UtilInputHandler {
 
     public LocalDate getUsersDateChoice() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-
-
-
 
         LocalDate localDate = null;
 

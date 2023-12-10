@@ -19,20 +19,20 @@ public class AdressService {
 
 
     public Adress createAdress(Adress adress){
-        return adresRepository.addAdres(adress);
+        return adresRepository.add(adress);
     }
 
     public Adress updateAdress(Adress adress){
-        return adresRepository.updateAdress(adress);
+        return adresRepository.update(adress);
     }
 
     public void deleteAdress(Adress adress){
-        adresRepository.deleteAdres(adress);
+        adresRepository.delete(adress);
     }
 
 
     public Adress findAdress(Integer id){
-        return adresRepository.findAdress(id);
+        return adresRepository.find(id, Adress.class);
     }
 
 

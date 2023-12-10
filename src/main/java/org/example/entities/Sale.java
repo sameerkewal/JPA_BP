@@ -17,11 +17,13 @@ public class Sale {
 
 
 
+    @Column(nullable = false)
+
     private LocalDateTime sale_date;
 
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
 

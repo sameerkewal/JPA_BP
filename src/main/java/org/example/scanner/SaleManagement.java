@@ -108,7 +108,9 @@ public class SaleManagement {
 
         addItemsToSale(sale);
 
-        while(true){
+        boolean doesUserWantToKeepAddingToSale = true;
+
+        while(doesUserWantToKeepAddingToSale){
             System.out.println("Do you want to add another item to the sale?");
             System.out.println("1. Yes");
             System.out.println("2. Finish Transaction");
@@ -126,10 +128,12 @@ public class SaleManagement {
                     if(!(saleProductsService.checkIfSaleHasProductsAddedToIt(sale))){
                         saleService.delete(sale);
                     }
-                    return;
+                    doesUserWantToKeepAddingToSale = false;
+                    break;
                 case 3:
                     saleProductsService.deleteSaleProducts(sale);
                     saleService.delete(sale);
+                    doesUserWantToKeepAddingToSale = false;
                     return;
             }
 

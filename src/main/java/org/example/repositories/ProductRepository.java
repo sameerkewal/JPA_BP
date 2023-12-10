@@ -63,7 +63,7 @@ public class ProductRepository extends Repository<Product> {
     public List<Product>getProductByName(String productName){
         this.entityManager.getTransaction().begin();
 
-        Query query = entityManager.createQuery("select  pdt from Product pdt where lower(name)=:p1");
+        Query query = entityManager.createQuery("select  pdt from Product pdt where lower(name)=lower(:p1)");
         query.setParameter("p1", productName);
 
         List<Product> resultList = query.getResultList();

@@ -1,10 +1,8 @@
 package org.example.scanner;
 
-import org.example.entities.Sale;
-
 import java.util.Scanner;
 
-public class UserInputHandler {
+public class MainMenuManagement {
 
     private final Scanner scanner;
     private final AdressManagement adressManagement;
@@ -19,7 +17,7 @@ public class UserInputHandler {
 
 
 
-    public UserInputHandler() {
+    public MainMenuManagement() {
 
         this.scanner = new Scanner(System.in);
         this.adressManagement = new AdressManagement(this.scanner);
@@ -60,7 +58,7 @@ public class UserInputHandler {
                     customerManagement.mainCustomerManagement();
                     break;
                 case 4:
-                    adressManagement.adressManagement();
+                    adressManagement.mainAdressManagement();
                     break;
                 case 5:
                     manufacturerManagement.mainManufacturerManagement();

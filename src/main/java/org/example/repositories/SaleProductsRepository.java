@@ -59,7 +59,7 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
         entityManager.getTransaction().begin();
 
         Query query = entityManager.createQuery(
-                "select  sps.product_id,  p.name, sps.total_sold, p.price, (sps.total_sold*p.price) as total_value from (select  product.id as product_id, sum(quantity) as total_sold from SaleProducts group by product.id) sps join Product p on p.id = sps.product_id");
+                "select  sps.product_id,  p.name, sps.total_sold, p.price, (sps.total_sold*p.price) as total_value from (select  product.id as product_id, sum(quantity) as total_sold from SaleProducts group by product.id) sps join Product p on p.id = sps.product_id order by 5 desc ");
 
         List<Object[]> resultList = query.getResultList();
         entityManager.getTransaction().commit();

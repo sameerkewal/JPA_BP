@@ -23,10 +23,14 @@ public abstract class Repository<T> {
         return addedObject;
     }
 
-    public void delete(T object){
-        entityManager.getTransaction().begin();
-        entityManager.remove(object);
-        entityManager.getTransaction().commit();
+    public void delete(T object) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(object);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public T find(Integer id, Class<T>entityclass){

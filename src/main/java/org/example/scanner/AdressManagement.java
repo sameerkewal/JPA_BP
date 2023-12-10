@@ -20,7 +20,7 @@ public class AdressManagement {
         
     }
 
-    public void adressManagement() {
+    protected void mainAdressManagement() {
 
             System.out.println("Adress Management: ");
             System.out.println("0. Exit");
@@ -50,12 +50,14 @@ public class AdressManagement {
                 case 0:
                     return;
 //                    break;
+                default:
+                    mainAdressManagement();
 
             }
 
 
             if(utilInputHandler.stayInSpecificManagement("addresses")){
-                adressManagement();
+                mainAdressManagement();
             }
 
         }
@@ -139,7 +141,7 @@ public class AdressManagement {
 
             }
         }else{
-            adressManagement();
+            mainAdressManagement();
         }
 
     }

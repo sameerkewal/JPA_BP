@@ -42,6 +42,8 @@ public class CustomerManagement {
                 break;
             case 0:
                 return;
+            default:
+                mainCustomerManagement();
 
         }
 
@@ -73,7 +75,7 @@ public class CustomerManagement {
         String lastName = utilInputHandler.getUserStringChoice();
 
         System.out.println("Provide phonenumber: ");
-        String phonenumber = utilInputHandler.getUserStringChoice();
+        String phoneNumber = String.valueOf(utilInputHandler.getUserIntegerChoice());
 
         System.out.println("Provide streetname of customer: ");
         String streetNameOfCustomer = utilInputHandler.getUserStringChoice();
@@ -89,12 +91,12 @@ public class CustomerManagement {
             String neighborhoodOfCustomer = utilInputHandler.getUserStringChoice();
 
             Adress adressAdded = adressService.createAdress(new Adress(streetNameOfCustomer, houseNumberOfCustomer, neighborhoodOfCustomer));
-            Customer addedCustomer = customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressAdded));
+            Customer addedCustomer = customerService.addCustomer(new Customer(firstName, lastName, phoneNumber, adressAdded));
             System.out.println(addedCustomer);
             return addedCustomer;
 
         }else{
-            Customer addedCustomer= customerService.addCustomer(new Customer(firstName, lastName, phonenumber, adressByStreetNameAndHouseNumber));
+            Customer addedCustomer= customerService.addCustomer(new Customer(firstName, lastName, phoneNumber, adressByStreetNameAndHouseNumber));
             System.out.println(addedCustomer);
             return addedCustomer;
         }

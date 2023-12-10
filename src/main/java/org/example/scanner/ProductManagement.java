@@ -57,6 +57,8 @@ public class ProductManagement {
             case 0:
                 return;
 //                    break;
+            default:
+                mainProductManagement();
 
         }
 

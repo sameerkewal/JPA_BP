@@ -10,7 +10,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
 
     private String lastname;
 
@@ -19,7 +21,7 @@ public class Customer {
 
 
     @ManyToOne
-    @JoinColumn(name = "adress_id")
+    @JoinColumn(name = "adress_id", nullable = false)
     private Adress adress;
 
 

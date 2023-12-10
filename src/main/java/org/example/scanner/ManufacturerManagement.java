@@ -46,6 +46,8 @@ public class ManufacturerManagement {
                 break;
             case 0:
                 return;
+            default:
+                mainManufacturerManagement();
         }
 
         if(utilInputHandler.stayInSpecificManagement("manufacturers")){
@@ -90,7 +92,6 @@ public class ManufacturerManagement {
                 updateManufacturer();
             } else {
                 manufacturerService.removeManufacturer(manufacturerToDelete);
-                System.out.println("Manufacturer Removed");
             }
         }
     }
