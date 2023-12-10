@@ -1,4 +1,4 @@
-package org.example.scanner;
+package org.example.ui;
 
 import java.util.Scanner;
 

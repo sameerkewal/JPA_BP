@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.scanner.MainMenuManagement;
+import org.example.ui.MainMenuManagement;
 
 import java.util.Scanner;
 

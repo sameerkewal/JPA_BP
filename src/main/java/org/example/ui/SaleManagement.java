@@ -1,4 +1,4 @@
-package org.example.scanner;
+package org.example.ui;
 
 import org.example.entities.Customer;
 import org.example.entities.Product;
