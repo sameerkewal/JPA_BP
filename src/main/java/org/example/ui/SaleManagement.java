@@ -197,7 +197,6 @@ public class SaleManagement {
         System.out.println("2. No");
         System.out.println("3. Add Customer");
 
-
         int doesUserKnowIdOfCustomer = utilInputHandler.getUserIntegerChoice();
 
         if(doesUserKnowIdOfCustomer == 2){
@@ -233,24 +232,14 @@ public class SaleManagement {
     }
 
     public void notifyCustomer(Sale sale){
-
-
         Sale foundSale = saleService.find(sale.getId());
-
-
         List<SaleProducts> productsFromSale = saleService.getProductsFromSale(foundSale);
-
         StringBuilder boughtItems = new StringBuilder(STR."\{foundSale.getCustomer().getFirstname()} \{foundSale.getCustomer().getLastname()}, you bought: ");
-
-
 
         for(SaleProducts saleProducts1: productsFromSale){
 
                  boughtItems.append(STR."\n\{saleProducts1.getProduct().getName()}(\{saleProducts1.getQuantity()})");
         }
-
         events.notify("Add Sale", String.valueOf(boughtItems), foundSale.getCustomer().getPhonenumber());
-
-
     }
 }
