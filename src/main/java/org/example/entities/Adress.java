@@ -2,6 +2,8 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Adress", uniqueConstraints = @UniqueConstraint(columnNames = {"streetname", "housenumber"}))
 public class Adress {
@@ -20,8 +22,15 @@ public class Adress {
     @Column(name = "neighborhood", nullable = true, length = 100)
     private String neighborhood;
 
+    @OneToMany(mappedBy = "adress")
+    private List<Customer> customers;
 
-    public Adress( String streetname, Integer housenumber, String neighborhood) {
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+
+    public Adress(String streetname, Integer housenumber, String neighborhood) {
         this.streetname = streetname;
         this.housenumber = housenumber;
         this.neighborhood = neighborhood;

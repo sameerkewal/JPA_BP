@@ -2,6 +2,7 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "Sale_Products")
 public class SaleProducts {

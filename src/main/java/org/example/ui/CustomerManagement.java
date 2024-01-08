@@ -75,7 +75,8 @@ public class CustomerManagement {
         String lastName = utilInputHandler.getUserStringChoice();
 
         System.out.println("Provide phonenumber: ");
-        String phoneNumber = String.valueOf(utilInputHandler.getUserIntegerChoice());
+//        String phoneNumber = String.valueOf(utilInputHandler.getUserIntegerChoice());
+          String phoneNumber = utilInputHandler.getUserStringChoice();
 
         System.out.println("Provide streetname of customer: ");
         String streetNameOfCustomer = utilInputHandler.getUserStringChoice();

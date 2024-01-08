@@ -89,7 +89,7 @@ public class ManufacturerManagement {
 
             if (manufacturerToDelete == null) {
                 System.out.println("No Manufacturer with that ID exists. Please try again");
-                updateManufacturer();
+                deleteManufacturer();
             } else {
                 manufacturerService.removeManufacturer(manufacturerToDelete);
             }

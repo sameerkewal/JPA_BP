@@ -2,6 +2,9 @@ package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.example.entities.Customer;
 
 import java.util.List;
@@ -15,7 +18,6 @@ public class CustomerRepository extends Repository<Customer> {
         super(entityManager);
         this.entityManager = entityManager;
     }
-
 
 
 
@@ -33,6 +35,7 @@ public class CustomerRepository extends Repository<Customer> {
         entityManager.getTransaction().commit();
 
         return find(customer.getId(), Customer.class);
+
     }
 
 
@@ -55,4 +58,27 @@ public class CustomerRepository extends Repository<Customer> {
 
 
     }
+
+    public void getAllCustomers(){
+        this.entityManager.getTransaction().begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+
+        Root<Customer> CustomerRoot = criteriaQuery.from(Customer.class);
+        criteriaQuery.select(CustomerRoot);
+        Query query = entityManager.createQuery(criteriaQuery);
+
+        List<Customer> CustomerList = query.getResultList();
+
+        for(Customer Customer: CustomerList){
+            System.out.println(Customer);
+        }
+
+        // Commit the transaction (assuming you're in a transactional context)
+        entityManager.getTransaction().commit();
+
+
+
+    }
+    
 }

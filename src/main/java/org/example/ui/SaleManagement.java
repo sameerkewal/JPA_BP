@@ -4,6 +4,8 @@ import org.example.entities.Customer;
 import org.example.entities.Product;
 import org.example.entities.Sale;
 import org.example.entities.SaleProducts;
+import org.example.observerpattern.EventManager;
+import org.example.observerpattern.SmsNotificationListener;
 import org.example.service.CustomerService;
 import org.example.service.ProductService;
 import org.example.service.SaleProductsService;
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class SaleManagement {
     private final Scanner scanner;
@@ -25,6 +28,7 @@ public class SaleManagement {
     private final CustomerManagement customerManagement;
     private final SaleService saleService;
     private final SaleProductsService saleProductsService;
+    private EventManager events;
 
 
 
@@ -37,6 +41,10 @@ public class SaleManagement {
         this.productService = new ProductService();
         this.saleService = new SaleService();
         this.saleProductsService = new SaleProductsService();
+
+        //Observer Pattern
+        this.events = new EventManager("Add Sale");
+        this.events.subscribe("Add Sale", new SmsNotificationListener());
     }
 
     public void mainSaleManagement(){
@@ -129,6 +137,7 @@ public class SaleManagement {
                         saleService.delete(sale);
                     }
                     doesUserWantToKeepAddingToSale = false;
+                    notifyCustomer(sale);
                     break;
                 case 3:
                     saleProductsService.deleteSaleProducts(sale);
@@ -220,6 +229,28 @@ public class SaleManagement {
 
     public Sale addSale(Customer customerToAddToSale){
         return saleService.add(new Sale(LocalDateTime.now(), customerToAddToSale));
+
+    }
+
+    public void notifyCustomer(Sale sale){
+
+
+        Sale foundSale = saleService.find(sale.getId());
+
+
+        List<SaleProducts> productsFromSale = saleService.getProductsFromSale(foundSale);
+
+        StringBuilder boughtItems = new StringBuilder(STR."\{foundSale.getCustomer().getFirstname()} \{foundSale.getCustomer().getLastname()}, you bought: ");
+
+
+
+        for(SaleProducts saleProducts1: productsFromSale){
+
+                 boughtItems.append(STR."\n\{saleProducts1.getProduct().getName()}(\{saleProducts1.getQuantity()})");
+        }
+
+        events.notify("Add Sale", String.valueOf(boughtItems), foundSale.getCustomer().getPhonenumber());
+
 
     }
 }

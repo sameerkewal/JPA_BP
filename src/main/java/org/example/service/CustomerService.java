@@ -33,4 +33,8 @@ public class CustomerService {
     public List<Customer> findCustomersByFirstAndLastName(String firstName, String lastName){
         return customerRepository.findCustomersByFirstAndLastName(firstName, lastName);
     }
+
+    public void getAllCustomers(){
+        customerRepository.getAllCustomers();
+    }
 }
