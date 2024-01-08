@@ -25,11 +25,9 @@ public class AdresRepository extends Repository<Adress> {
         Adress adressToUpdate = find(adress.getId(), Adress.class);
         entityManager.getTransaction().begin();
 
-
         adressToUpdate.setStreetname(adress.getStreetname());
         adressToUpdate.setHousenumber(adress.getHousenumber());
         adressToUpdate.setNeighborhood(adressToUpdate.getNeighborhood());
-
 
         entityManager.getTransaction().commit();
         return adressToUpdate;
@@ -50,6 +48,7 @@ public class AdresRepository extends Repository<Adress> {
 
         Query query = entityManager.createQuery("select adress from Adress adress where lower(streetname)=lower(:p1) ");
         query.setParameter("p1", streetname);
+
         List<Adress> resultList = query.getResultList();
         entityManager.getTransaction().commit();
         return resultList;
@@ -66,6 +65,7 @@ public class AdresRepository extends Repository<Adress> {
                 "and    housenumber = :p2");
         query.setParameter("p1", streetName);
         query.setParameter("p2", houseNumber);
+
         List<Adress> resultList = query.getResultList();
         entityManager.getTransaction().commit();
         if(resultList.isEmpty()){

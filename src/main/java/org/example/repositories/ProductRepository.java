@@ -42,18 +42,6 @@ public class ProductRepository extends Repository<Product> {
         query.setParameter("p1", manufacturer);
 
         List<Product> resultList = query.getResultList();
-
-
-//        List<Object[]> resultList = query.getResultList();
-//        System.out.println(resultList.size());
-//
-//        for (Object[] result : resultList) {
-//            Product product = (Product) result[0];
-//            Manufacturer manufacturer1 = (Manufacturer) result[1];
-//
-//            System.out.println("Product: " + product);
-//            System.out.println("Manufacturer: " + manufacturer1);
-//            System.out.println("------------------------------");
         entityManager.getTransaction().commit();
         return resultList;
 
