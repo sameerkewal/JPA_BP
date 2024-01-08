@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entities.Adress;
 import org.example.entities.SaleProducts;
+import org.example.observerpattern.SmsNotificationListener;
 import org.example.service.AdressService;
 import org.example.service.CustomerService;
 import org.example.ui.MainMenuManagement;
@@ -12,6 +13,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        SmsNotificationListener smsNotificationListener = new SmsNotificationListener();
 //
         MainMenuManagement MainMenuManagement = new MainMenuManagement();
         MainMenuManagement.handleUserInput();
