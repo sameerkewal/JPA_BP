@@ -63,7 +63,8 @@ public class CustomerManagement {
         if(customersByFirstAndLastName.isEmpty()){
             System.out.println("No customers with that first and last name found");
         }else{
-            System.out.println(customersByFirstAndLastName);
+            customersByFirstAndLastName.forEach(System.out::println);
+
         }
     }
 

@@ -1,6 +1,8 @@
 package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.RollbackException;
+import org.hibernate.exception.ConstraintViolationException;
 
 public abstract class Repository<T> {
 
@@ -19,7 +21,9 @@ public abstract class Repository<T> {
             entityManager.getTransaction().commit();
 
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
         }
         return addedObject;
     }

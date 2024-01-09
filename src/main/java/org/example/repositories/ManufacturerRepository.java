@@ -2,8 +2,11 @@ package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.persistence.RollbackException;
 import org.example.entities.Manufacturer;
+import org.hibernate.exception.ConstraintViolationException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class ManufacturerRepository extends Repository<Manufacturer>{
@@ -19,16 +22,22 @@ public class ManufacturerRepository extends Repository<Manufacturer>{
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        Manufacturer manufacturerToUpdate = find(manufacturer.getId(), Manufacturer.class);
-        entityManager.getTransaction().begin();
 
+        try {
+            entityManager.getTransaction().begin();
+            Manufacturer manufacturerToUpdate = find(manufacturer.getId(), Manufacturer.class);
 
-        manufacturerToUpdate.setName(manufacturer.getName());
-        manufacturerToUpdate.setCountry(manufacturer.getCountry());
+            manufacturerToUpdate.setName(manufacturer.getName());
+            manufacturerToUpdate.setCountry(manufacturer.getCountry());
 
+            entityManager.getTransaction().commit();
 
-        entityManager.getTransaction().commit();
-
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            System.out.println(e.getMessage());
+        }
         return find(manufacturer.getId(), Manufacturer.class);
 
 

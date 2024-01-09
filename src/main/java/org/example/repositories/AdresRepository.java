@@ -22,16 +22,23 @@ public class AdresRepository extends Repository<Adress> {
 
     @Override
     public Adress update(Adress adress) {
-        Adress adressToUpdate = find(adress.getId(), Adress.class);
-        entityManager.getTransaction().begin();
+        try {
+            Adress adressToUpdate = find(adress.getId(), Adress.class);
+            entityManager.getTransaction().begin();
 
-        adressToUpdate.setStreetname(adress.getStreetname());
-        adressToUpdate.setHousenumber(adress.getHousenumber());
-        adressToUpdate.setNeighborhood(adressToUpdate.getNeighborhood());
+            adressToUpdate.setStreetname(adress.getStreetname());
+            adressToUpdate.setHousenumber(adress.getHousenumber());
+            adressToUpdate.setNeighborhood(adressToUpdate.getNeighborhood());
 
-        entityManager.getTransaction().commit();
-        return adressToUpdate;
+            entityManager.getTransaction().commit();
 
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            System.out.println(e.getMessage());
+        }
+        return find(adress.getId(), Adress.class);
     }
 
 

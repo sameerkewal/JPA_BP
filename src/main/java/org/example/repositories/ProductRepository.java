@@ -19,14 +19,22 @@ public class ProductRepository extends Repository<Product> {
 
     @Override
     public Product update(Product product) {
-        Product productToUpdate = find(product.getId(), Product.class);
-        entityManager.getTransaction().begin();
+        try {
+            Product productToUpdate = find(product.getId(), Product.class);
+            entityManager.getTransaction().begin();
 
-        productToUpdate.setName(product.getName());
-        productToUpdate.setPrice(product.getPrice());
-        productToUpdate.setManufacturer(product.getManufacturer());
+            productToUpdate.setName(product.getName());
+            productToUpdate.setPrice(product.getPrice());
+            productToUpdate.setManufacturer(product.getManufacturer());
 
-        entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
+            return find(product.getId(), Product.class);
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            System.out.println(e.getMessage());
+        }
         return find(product.getId(), Product.class);
     }
 
