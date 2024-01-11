@@ -31,7 +31,7 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
         Query query = entityManager.createQuery(
                 "select sps from SaleProducts sps join Sale sle on sle.id=sps.sale.id where sle.id=:p1");
 
-        System.out.println(sale.getId());
+
         query.setParameter("p1", sale.getId());
 
         List<SaleProducts> result  = query.getResultList();
@@ -99,7 +99,6 @@ public class SaleProductsRepository extends Repository<SaleProducts>{
 
     public List<SaleProducts> getSalesBasedOnDate(LocalDateTime localDateTime){
         this.entityManager.getTransaction().begin();
-        System.out.println(STR."localdatetime received is: \{localDateTime}");
 
         java.sql.Date sqlDate = java.sql.Date.valueOf(localDateTime.toLocalDate());
 

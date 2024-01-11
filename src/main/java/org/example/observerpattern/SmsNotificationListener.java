@@ -28,6 +28,6 @@ public class SmsNotificationListener implements  EventListener{
                         outgoingMessage)
                 .create();
 
-        System.out.println(message.getSid());
+//        System.out.println(message.getSid());
     }
 }

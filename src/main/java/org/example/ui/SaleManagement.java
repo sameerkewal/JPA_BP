@@ -86,8 +86,13 @@ public class SaleManagement {
 
         List<SaleProducts> salesBasedOnDate = saleProductsService.getSalesBasedOnDate(usersDateChoice.atStartOfDay());
 
-        for (SaleProducts saleProducts: salesBasedOnDate){
-            System.out.println(STR."\{saleProducts.getSale().getId()}: \{saleProducts.getProduct()},\{saleProducts.getQuantity()} bought by \{saleProducts.getSale().getCustomer()} at \{saleProducts.getSale().getSale_date()}");
+        if(salesBasedOnDate.isEmpty()){
+            System.out.println("No Sales registered on that date");
+        } else {
+
+            for (SaleProducts saleProducts : salesBasedOnDate) {
+                System.out.println(STR. "\{ saleProducts.getSale().getId() }: \{ saleProducts.getProduct() },\{ saleProducts.getQuantity() } bought by \{ saleProducts.getSale().getCustomer() } at \{ saleProducts.getSale().getSale_date() }" );
+            }
         }
     }
 
@@ -125,8 +130,6 @@ public class SaleManagement {
             System.out.println("3. Cancel Transaction");
             int choice = utilInputHandler.getUserIntegerChoice();
 
-//            Do you know the ID of item to add to sale? ->correct
-            //Do you want to add another item to the sale? -> correct
 
             switch (choice){
                 case 1:
@@ -137,7 +140,7 @@ public class SaleManagement {
                         saleService.delete(sale);
                     }
                     doesUserWantToKeepAddingToSale = false;
-                    notifyCustomer(sale);
+//                    notifyCustomer(sale);
                     break;
                 case 3:
                     saleProductsService.deleteSaleProducts(sale);
@@ -231,15 +234,17 @@ public class SaleManagement {
 
     }
 
-    public void notifyCustomer(Sale sale){
+    public void notifyCustomer(Sale sale) {
         Sale foundSale = saleService.find(sale.getId());
         List<SaleProducts> productsFromSale = saleService.getProductsFromSale(foundSale);
-        StringBuilder boughtItems = new StringBuilder(STR."\{foundSale.getCustomer().getFirstname()} \{foundSale.getCustomer().getLastname()}, you bought: ");
+        if (!productsFromSale.isEmpty()) {
+            StringBuilder boughtItems = new StringBuilder(STR. "\{ foundSale.getCustomer().getFirstname() } \{ foundSale.getCustomer().getLastname() }, you bought: " );
 
-        for(SaleProducts saleProducts1: productsFromSale){
+            for (SaleProducts saleProducts1 : productsFromSale) {
 
-                 boughtItems.append(STR."\n\{saleProducts1.getProduct().getName()}(\{saleProducts1.getQuantity()})");
+                boughtItems.append(STR. "\n\{ saleProducts1.getProduct().getName() }(\{ saleProducts1.getQuantity() })" );
+            }
+            events.notify("Add Sale", String.valueOf(boughtItems), foundSale.getCustomer().getPhonenumber());
         }
-        events.notify("Add Sale", String.valueOf(boughtItems), foundSale.getCustomer().getPhonenumber());
     }
 }

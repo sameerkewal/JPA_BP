@@ -5,6 +5,7 @@ import jakarta.persistence.Query;
 import org.example.entities.Sale;
 import org.example.entities.SaleProducts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleRepository extends Repository<Sale> {
@@ -23,16 +24,23 @@ public class SaleRepository extends Repository<Sale> {
         return null;
     }
 
-    public List<SaleProducts> getProductsFromSale(Sale sale){
-        this.entityManager.getTransaction().begin();
+    public List<SaleProducts> getProductsFromSale(Sale sale) {
 
-        Query query = entityManager.createQuery("select sps from SaleProducts sps where sps.sale.id=:p1");
-        query.setParameter("p1", sale.getId());
-        List<SaleProducts> resultList = query.getResultList();
-        this.entityManager.getTransaction().commit();
+        List<SaleProducts> resultList = new ArrayList<>();
+//        if (!this.entityManager.getTransaction().isActive()) {
+            this.entityManager.getTransaction().begin();
+//        } else {
 
-        return resultList;
-    }
+            Query query = entityManager.createQuery("select sps from SaleProducts sps where sps.sale.id=:p1");
+            query.setParameter("p1", sale.getId());
+            resultList = query.getResultList();
+            this.entityManager.getTransaction().commit();
+
+            return resultList;
+        }
+//        return resultList;
+//
+//    }
 
 
 }
