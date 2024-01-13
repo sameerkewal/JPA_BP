@@ -4,6 +4,11 @@ Een winkel zou de mogelijkheid willen om de producten die zij verkopen bij te ho
 inclusief de verkoop van deze items. Verder willen ze ook de klanten bijhouden aan wie
 deze producten allemaal verkocht worden
 
+# Design Patterns: 
+
+- Creational Pattern: Singleton
+- Behavioral Pattern: Observer
+
 
 
 
