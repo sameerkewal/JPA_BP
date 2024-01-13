@@ -12,25 +12,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        SmsNotificationListener smsNotificationListener = new SmsNotificationListener();
-//
         MainMenuManagement MainMenuManagement = new MainMenuManagement();
         MainMenuManagement.handleUserInput();
 
-
-
-
-
-//        CustomerService customerService = new CustomerService();
-//        customerService.getAllCustomers();
-//        AdressService adressService = new AdressService();
-//        Adress adress = adressService.findAdress(9);
-//        System.out.println(adress.getCustomers());
-
-
-//        customerService.addCustomer(new Customer("test", "print", "115", adressService.findAdress(1)));
 
 
     }
