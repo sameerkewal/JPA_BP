@@ -140,7 +140,7 @@ public class SaleManagement {
                         saleService.delete(sale);
                     }
                     doesUserWantToKeepAddingToSale = false;
-//                    notifyCustomer(sale);
+                    notifyCustomer(sale);
                     break;
                 case 3:
                     saleProductsService.deleteSaleProducts(sale);
